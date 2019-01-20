@@ -1,0 +1,41 @@
+<h5>Zad2 a) - przesłanie parametrów mandelbrota, po stronie serwera tworzony fractal zapisany na dysku, do klienta zwrocona nazwa pliku - identyfikator mandelbrota</h5>
+<div class="wrapper">
+  <div>
+      <form [formGroup]="formMandel" (ngSubmit)="postMandel()">
+        <div>
+            <label for="xDim">Give X dimension</label>
+            <input appInp1 type="number" id="xDim" formControlName="xDim">
+        </div>
+        <div>
+            <label for="yDim">Give Y dimension</label>
+            <input appInp1 type="number" id="yDim" formControlName="yDim">
+        </div>
+        <div>
+            <label for="countIter">Give a count of iterations</label>
+            <input appInp1 type="number" id="countIter" formControlName="countIter">
+        </div>
+        <button appBut1 type="submit" [disabled]="formMandel.invalid">PostMandelbrot</button>
+      </form>
+  </div>
+  <div *ngIf="this.http.mandelID.value">
+    <p>Identyfikator pliku</p>
+    <span>{{this.http.mandelID.value}}</span>
+  </div>
+</div>
+
+
+<h5>Zad2 b) - Wyslij zadanie do serwera, otrzymaj fractal mandelbrota</h5>
+<div class="wrapper">
+  <div>
+      <select style="width:100px;" id="mandelID" [(ngModel)]="chosenID">
+          <option [ngValue]="''">Select 1 matrix</option>
+          <option *ngFor="let item of mandelsID" [ngValue]="item">{{item}}</option>
+      </select>
+       <button (click)="getMandel(chosenID)" [disabled]="chosenID.length === 0">GetMandel</button>
+  </div>
+  <div *ngIf="this.http.mandelData.value">
+    <p>Mandelbrot image</p>
+      <img src="data:image/png;base64,{{this.http.mandelData.value}}">
+  </div>
+</div>
+

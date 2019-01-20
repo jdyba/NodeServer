@@ -1,0 +1,58 @@
+<h5>Zad1 a) - przesłanie dwóch macierzy, zwracany wynik i czas wykonania operacji</h5>
+<div class="wrapper">
+  <div>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <label for="firstFile">Upload your first matrix file</label>
+        <input appInp1 type="file" accept=".txt" (change)="onFile($event)" id="firstFile">
+      </div>
+      <div>
+        <label for="secondFile">Upload your second matrix file</label>
+        <input appInp1 type="file" accept=".txt" (change)="onFile($event)" id="secondFile">
+      </div>
+      <button appBut1 type="submit" [disabled]="form.invalid" >PostFile</button>
+    </form>
+  </div>
+  <div *ngIf="this.http.resPostFiles">
+    <p>Wynik mnozenia macierzy:</p>
+    <span *ngFor="let row of this.http.resPostFiles.matrix.data">{{row}}<br></span>
+    <p>Czas operacji: {{this.http.resPostFiles.time}} ms</p>
+  </div>
+</div>
+
+<h5>Zad1 b) - przesłanie dowolnej macierzy, po stronie serwera macierz zapisana na dysku, do klienta zwrocona nazwa pliku - identyfikator macierzy</h5>
+<div class="wrapper">
+  <div>
+    <div>
+        <label for="matrixFile">Upload your matrix file.</label>
+        <input appInp1 type="file" accept=".txt" (change)="onMatrixFile($event)" id="matrixFile">
+    </div>
+    <button type="button" (click)="sendMatrix()" [disabled]="this.desactive" >Send matrix</button>
+  </div>
+  <div *ngIf="this.http.matrixID.value">
+    <p>Identyfikator pliku</p>
+    <span>{{this.http.matrixID.value}}</span>
+  </div>
+</div>
+
+<h5>Zad1 c) - przeslij dwa identyfikatory, otrzymaj wymnozona macierz</h5>
+<div class="wrapper">
+  <div>
+    <form [formGroup]="matrixIdForm" (ngSubmit)="sendIDs()">
+      <select style="width:100px;" id="firstID" formControlName="firstID">
+          <option [ngValue]="null">Select 1 matrix</option>
+          <option *ngFor="let item of matriciesID" [ngValue]="item">{{item}}</option>
+      </select>
+      <select style="width:100px;" id="firstID" formControlName="secondID">
+          <option [ngValue]="null">Select 2 matrix</option>
+          <option *ngFor="let item of matriciesID" [ngValue]="item">{{item}}</option>
+      </select>
+       <button type="submit" [disabled]="matrixIdForm.invalid">Send</button>
+    </form>
+  </div>
+  <div *ngIf="this.http.multiplyMatrixID.value">
+    <p>Identyfikator pliku</p>
+    <span>{{this.http.multiplyMatrixID.value}}</span>
+  </div>
+</div>
+

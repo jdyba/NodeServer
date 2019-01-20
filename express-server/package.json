@@ -1,0 +1,25 @@
+{
+  "name": "express-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/mathjs": "^4.4.1",
+    "body-parser": "^1.18.3",
+    "canvas-prebuilt": "^2.0.0-alpha.14",
+    "circular-json": "^0.5.9",
+    "cors": "^2.8.4",
+    "express": "^4.16.4",
+    "formidable": "^1.2.1",
+    "joi": "^13.1.0",
+    "mathjs": "^5.2.2",
+    "node-png": "^0.4.3",
+    "node-pre-gyp": "^0.11.0"
+  }
+}
